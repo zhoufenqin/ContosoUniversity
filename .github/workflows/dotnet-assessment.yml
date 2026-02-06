@@ -1,0 +1,90 @@
+name: .NET Application Assessment
+
+on:
+  workflow_dispatch:
+    inputs:
+      workspace_path:
+        description: 'Path to the workspace (default: repository root)'
+        required: false
+        default: '.'
+
+jobs:
+  assess-dotnet-application:
+    name: Run AppCAT Assessment
+    runs-on: windows-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '6.0.x'
+      
+      - name: Display environment information
+        run: |
+          Write-Host "OS: $env:OS"
+          Write-Host "OS Version: $(Get-ComputerInfo | Select-Object -ExpandProperty OsName)"
+          Write-Host ".NET SDK Version:"
+          dotnet --version
+          Write-Host "Working Directory: $(Get-Location)"
+      
+      - name: Install AppCAT CLI (if needed)
+        run: |
+          Write-Host "Checking for AppCAT CLI..."
+          # AppCAT CLI will be installed automatically by assessment tools
+          # This step is a placeholder for manual installation if needed
+          Write-Host "AppCAT will be installed by the assessment process if not present"
+      
+      - name: Run Assessment Pre-check
+        run: |
+          Write-Host "Running assessment pre-check..."
+          Write-Host "Project Path: ${{ github.workspace }}"
+          # The actual assessment would be run here using MCP tools
+          # For manual execution, see ASSESSMENT_INSTRUCTIONS.md
+      
+      - name: Run AppCAT Assessment
+        run: |
+          Write-Host "Running AppCAT assessment..."
+          Write-Host "This workflow provides the Windows environment required for .NET assessment"
+          Write-Host "To complete the assessment, use the Assessment MCP server tools:"
+          Write-Host "1. appmod-precheck-assessment"
+          Write-Host "2. appmod-run-assessment"
+          Write-Host ""
+          Write-Host "Or run AppCAT CLI directly if installed"
+      
+      - name: Check for assessment results
+        run: |
+          $reportPath = ".github/appmod/report.json"
+          if (Test-Path $reportPath) {
+            Write-Host "Assessment report found at: $reportPath"
+            Write-Host "Report contents:"
+            Get-Content $reportPath | Write-Host
+          } else {
+            Write-Host "No assessment report found yet."
+            Write-Host "Assessment needs to be run using MCP tools or AppCAT CLI"
+          }
+      
+      - name: Upload assessment results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: assessment-report
+          path: |
+            .github/appmod/
+          retention-days: 30
+      
+      - name: Summary
+        run: |
+          Write-Host "========================================="
+          Write-Host "Assessment Workflow Completed"
+          Write-Host "========================================="
+          Write-Host ""
+          Write-Host "This workflow provides a Windows environment for .NET assessment."
+          Write-Host "To run the actual assessment, you can:"
+          Write-Host "1. Use GitHub Copilot with Assessment MCP server tools in this Windows environment"
+          Write-Host "2. Install and run AppCAT CLI manually"
+          Write-Host "3. Use the Assessment skill in a Windows Codespace"
+          Write-Host ""
+          Write-Host "See .github/appmod/ASSESSMENT_INSTRUCTIONS.md for details"
