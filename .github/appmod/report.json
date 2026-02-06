@@ -1,0 +1,38 @@
+{
+  "status": "not_completed",
+  "reason": "Assessment requires Windows platform",
+  "details": {
+    "project": {
+      "name": "ContosoUniversity",
+      "type": ".NET",
+      "framework": "net6.0",
+      "platform": "ASP.NET Core Web Application"
+    },
+    "current_environment": {
+      "os": "Ubuntu Linux",
+      "supported": false,
+      "message": ".NET application assessment via AppCAT is only supported on Windows platforms"
+    },
+    "required_environment": {
+      "os": "Windows",
+      "versions": [
+        "Windows 10",
+        "Windows 11",
+        "Windows Server 2019 or later"
+      ],
+      "required_tools": [
+        ".NET SDK 6.0 or later",
+        "AppCAT CLI (auto-installed by assessment tool)"
+      ]
+    },
+    "next_steps": [
+      "Run this assessment on a Windows machine",
+      "Use GitHub Codespaces with Windows container",
+      "Use GitHub Actions with windows-latest runner",
+      "See ASSESSMENT_INSTRUCTIONS.md for detailed guidance"
+    ],
+    "instructions": "See .github/appmod/ASSESSMENT_INSTRUCTIONS.md for complete instructions"
+  },
+  "timestamp": "2026-02-06T06:38:03.386Z",
+  "note": "This is a placeholder. The actual assessment report will be generated when run on a Windows platform."
+}
