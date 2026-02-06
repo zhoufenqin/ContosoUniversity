@@ -25,6 +25,7 @@ This skill performs a simplified assessment workflow:
 2. **Run Assessment**: Trigger AppCAT analysis via Assessment MCP server
    - Auto-detects project type (Java or .NET)
    - Installs AppCAT tooling if needed
+     - For .NET projects: Use `dotnet tool update -g dotnet-appcat` to install/update the AppCAT tool
    - Analyzes code for cloud migration issues
    - Generates structured assessment data
    - Report is stored under `.github/appmod/` directory
