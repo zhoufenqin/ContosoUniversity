@@ -452,3 +452,6 @@ $RECYCLE.BIN/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+# AppCAT intermediate files (consolidated reports are in .github/modernize/)
+.github/appmod/
