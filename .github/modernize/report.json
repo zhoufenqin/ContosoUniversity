@@ -2,8 +2,8 @@
   "version": "1.0.0",
   "producer": ".NET AppCAT CLI",
   "metadata": {
-    "analysisStartTime": "2026-02-09T03:09:27.6770514Z",
-    "analysisEndTime": "2026-02-09T03:09:31.4729482Z",
+    "analysisStartTime": "2026-02-09T05:31:19.7446099Z",
+    "analysisEndTime": "2026-02-09T05:31:23.4950021Z",
     "privacyMode": "Protected",
     "privacyModeHelpUrl": "https://go.microsoft.com/fwlink/?linkid=2271074",
     "targetIds": [
@@ -65,7 +65,7 @@
       "incidents": [
         {
           "ruleId": "Scale.0001",
-          "incidentId": "9c2278a5-5588-4c07-928f-4a3a50b17fbb",
+          "incidentId": "03546a44-3cae-479c-bf00-3702beecc41f",
           "location": "ContosoUniversity/ContosoUniversity.csproj",
           "locationKind": "File",
           "snippet": "Found 33 files matching the rule:\n\nwwwroot/css/site.css\nwwwroot/favicon.ico\nwwwroot/js/site.js\nwwwroot/lib/bootstrap/dist/css/bootstrap-grid.css\nwwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css\nwwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css\nwwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css\nwwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css\nwwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css\nwwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css\nwwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css\nwwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css\nwwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css\nwwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css\nwwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css\nwwwroot/lib/bootstrap/dist/css/bootstrap.css\nwwwroot/lib/bootstrap/dist/css/bootstrap.min.css\nwwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css\nwwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css\nwwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js\nwwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js\nwwwroot/lib/bootstrap/dist/js/bootstrap.esm.js\nwwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js\nwwwroot/lib/bootstrap/dist/js/bootstrap.js\nwwwroot/lib/bootstrap/dist/js/bootstrap.min.js\nwwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js\nwwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js\nwwwroot/lib/jquery-validation/dist/additional-methods.js\nwwwroot/lib/jquery-validation/dist/additional-methods.min.js\nwwwroot/lib/jquery-validation/dist/jquery.validate.js\nwwwroot/lib/jquery-validation/dist/jquery.validate.min.js\nwwwroot/lib/jquery/dist/jquery.js\nwwwroot/lib/jquery/dist/jquery.min.js\n",
@@ -107,7 +107,7 @@
         },
         {
           "ruleId": "Connection.0001",
-          "incidentId": "5abdbb87-b7c1-499d-980f-af23d54a6c0a",
+          "incidentId": "f48a59b5-d8bd-4f8c-adfc-2e27ff1b54cb",
           "location": "ContosoUniversity/appsettings.json",
           "locationKind": "File",
           "snippet": "SchoolContext",
