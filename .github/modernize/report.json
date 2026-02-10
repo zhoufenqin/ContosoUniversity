@@ -2,8 +2,8 @@
   "version": "1.0.0",
   "producer": ".NET AppCAT CLI",
   "metadata": {
-    "analysisStartTime": "2026-02-10T11:56:33.3040252Z",
-    "analysisEndTime": "2026-02-10T11:56:39.1220306Z",
+    "analysisStartTime": "2026-02-10T12:06:57.9103221Z",
+    "analysisEndTime": "2026-02-10T12:07:03.5026077Z",
     "privacyMode": "Protected",
     "privacyModeHelpUrl": "https://go.microsoft.com/fwlink/?linkid=2271074",
     "targetIds": [
@@ -20,7 +20,8 @@
       "Azure App Service",
       "Azure Kubernetes Service",
       "Azure Container Apps",
-      "Azure App Service Container"
+      "Azure App Service Container",
+      "Azure App Service Managed Instance"
     ],
     "os": [
       "windows",
@@ -47,7 +48,7 @@
   },
   "projects": [
     {
-      "path": "ContosoUniversity\\ContosoUniversity.csproj",
+      "path": "ContosoUniversity/ContosoUniversity.csproj",
       "issues": 2,
       "storyPoints": 6,
       "properties": {
@@ -65,10 +66,10 @@
       "incidents": [
         {
           "ruleId": "Scale.0001",
-          "incidentId": "188fe90d-ec34-4fc2-8a45-1b59f5b48ac9",
-          "location": "ContosoUniversity\\ContosoUniversity.csproj",
+          "incidentId": "902d8198-dba3-473f-b666-8b4d63de6336",
+          "location": "ContosoUniversity/ContosoUniversity.csproj",
           "locationKind": "File",
-          "snippet": "Found 33 files matching the rule:\r\n\r\nwwwroot\\css\\site.css\r\nwwwroot\\favicon.ico\r\nwwwroot\\js\\site.js\r\nwwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css\r\nwwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css\r\nwwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css\r\nwwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css\r\nwwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css\r\nwwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css\r\nwwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css\r\nwwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css\r\nwwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css\r\nwwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css\r\nwwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css\r\nwwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css\r\nwwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css\r\nwwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css\r\nwwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css\r\nwwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css\r\nwwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js\r\nwwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js\r\nwwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js\r\nwwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js\r\nwwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js\r\nwwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js\r\nwwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js\r\nwwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js\r\nwwwroot\\lib\\jquery-validation\\dist\\additional-methods.js\r\nwwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js\r\nwwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js\r\nwwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js\r\nwwwroot\\lib\\jquery\\dist\\jquery.js\r\nwwwroot\\lib\\jquery\\dist\\jquery.min.js\r\n",
+          "snippet": "Found 33 files matching the rule:\n\nwwwroot/css/site.css\nwwwroot/favicon.ico\nwwwroot/js/site.js\nwwwroot/lib/bootstrap/dist/css/bootstrap-grid.css\nwwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css\nwwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css\nwwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css\nwwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css\nwwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css\nwwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css\nwwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css\nwwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css\nwwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css\nwwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css\nwwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css\nwwwroot/lib/bootstrap/dist/css/bootstrap.css\nwwwroot/lib/bootstrap/dist/css/bootstrap.min.css\nwwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css\nwwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css\nwwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js\nwwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js\nwwwroot/lib/bootstrap/dist/js/bootstrap.esm.js\nwwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js\nwwwroot/lib/bootstrap/dist/js/bootstrap.js\nwwwroot/lib/bootstrap/dist/js/bootstrap.min.js\nwwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js\nwwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js\nwwwroot/lib/jquery-validation/dist/additional-methods.js\nwwwroot/lib/jquery-validation/dist/additional-methods.min.js\nwwwroot/lib/jquery-validation/dist/jquery.validate.js\nwwwroot/lib/jquery-validation/dist/jquery.validate.min.js\nwwwroot/lib/jquery/dist/jquery.js\nwwwroot/lib/jquery/dist/jquery.min.js\n",
           "targets": {
             "AppService.Windows": {
               "severity": "optional",
@@ -107,8 +108,8 @@
         },
         {
           "ruleId": "Connection.0001",
-          "incidentId": "c7f4c429-b870-4aee-be66-556ecff3ca95",
-          "location": "ContosoUniversity\\appsettings.json",
+          "incidentId": "9ac2a7f5-af22-4c6b-ad08-0ba038da95ea",
+          "location": "ContosoUniversity/appsettings.json",
           "locationKind": "File",
           "snippet": "SchoolContext",
           "targets": {
