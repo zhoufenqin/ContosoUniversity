@@ -123,7 +123,7 @@ The application manages an educational institution with the following entities:
 ## Migration Considerations
 
 ### Current State
-- **Framework**: ASP.NET Core 6.0 (currently supported until Nov 2024)
+- **Framework**: ASP.NET Core 6.0 (support ended November 2024 - upgrade recommended)
 - **Database**: SQL Server LocalDB (development only)
 - **Architecture**: Traditional monolithic web application
 
@@ -134,7 +134,7 @@ Based on the AppCAT analysis, the following issues were identified:
 - **1 potential issue** - Possible migration consideration
 
 ### Key Observations
-1. **Modern Framework**: Already using .NET 6.0 (relatively recent)
+1. **Framework Status**: Using .NET 6.0 (support ended Nov 2024) - upgrade to .NET 8.0 LTS or .NET 9.0 recommended
 2. **Cloud-Ready Patterns**: Using dependency injection and configuration providers
 3. **Database**: Using LocalDB which needs to be replaced for production/cloud deployment
 4. **Stateless Design**: Razor Pages architecture supports horizontal scaling
