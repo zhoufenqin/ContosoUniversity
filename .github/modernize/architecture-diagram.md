@@ -8,8 +8,8 @@ This diagram illustrates the layered structure of the application and how data f
 
 ```mermaid
 graph TD
-    A[Presentation Layer\nPages / Views] --> B[Business Logic Layer\nPage Models]
-    B --> C[Data Access Layer\nDbContext]
-    C --> D[Data Store\nDatabase]
-    A --> E[Static Content\nwwwroot]
+    A[Presentation Layer\nPages and Views] --> B[Business Logic Layer\nPage Models]
+    B --> C[Data Access Layer\nContext and Initializer]
+    C --> D[Domain Models\nStudents, Courses, Departments, Instructors]
+    A --> E[Static Content\nClient-side Assets]
 ```
