@@ -1,4 +1,4 @@
-﻿# Modernization Assessment Summary
+# Modernization Assessment Summary
 
 **Target Azure Services**: Azure App Service, Azure Kubernetes Service, Azure Container Apps, Azure App Service Container, Azure App Service Managed Instance
 
