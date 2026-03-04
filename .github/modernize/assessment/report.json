@@ -2,8 +2,8 @@
   "version": "1.0.0",
   "producer": ".NET AppCAT CLI",
   "metadata": {
-    "analysisStartTime": "2026-03-04T06:30:12.3939298Z",
-    "analysisEndTime": "2026-03-04T06:30:25.5965059Z",
+    "analysisStartTime": "2026-03-04T08:15:13.2891248Z",
+    "analysisEndTime": "2026-03-04T08:15:18.6525524Z",
     "privacyMode": "Restricted",
     "privacyModeHelpUrl": "https://go.microsoft.com/fwlink/?linkid=2271074",
     "targetIds": [
@@ -48,7 +48,7 @@
   },
   "projects": [
     {
-      "path": "ContosoUniversity\\ContosoUniversity.csproj",
+      "path": "ContosoUniversity/ContosoUniversity.csproj",
       "issues": 2,
       "storyPoints": 6,
       "properties": {
@@ -66,8 +66,8 @@
       "incidents": [
         {
           "ruleId": "Scale.0001",
-          "incidentId": "baf526d3-2e33-4ffc-911f-73a5047bf115",
-          "location": "ContosoUniversity\\ContosoUniversity.csproj",
+          "incidentId": "a3f55671-7693-4664-8d49-6a0cc7ee5aee",
+          "location": "ContosoUniversity/ContosoUniversity.csproj",
           "locationKind": "File",
           "targets": {
             "AppService.Windows": {
@@ -107,8 +107,8 @@
         },
         {
           "ruleId": "Connection.0001",
-          "incidentId": "2cd30992-5e8b-4d8c-a91b-5c7ee541c888",
-          "location": "ContosoUniversity\\appsettings.json",
+          "incidentId": "a8a59335-b5b2-43e5-bdbc-385793008599",
+          "location": "ContosoUniversity/appsettings.json",
           "locationKind": "File",
           "targets": {
             "AppService.Windows": {
