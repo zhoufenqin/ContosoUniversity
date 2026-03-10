@@ -2,8 +2,8 @@
   "version": "1.0.0",
   "producer": ".NET AppCAT CLI",
   "metadata": {
-    "analysisStartTime": "2026-03-10T07:40:45.9269294Z",
-    "analysisEndTime": "2026-03-10T07:40:51.2658934Z",
+    "analysisStartTime": "2026-03-10T09:51:20.1804802Z",
+    "analysisEndTime": "2026-03-10T09:51:24.9551145Z",
     "privacyMode": "Restricted",
     "privacyModeHelpUrl": "https://go.microsoft.com/fwlink/?linkid=2271074",
     "targetIds": [
@@ -66,7 +66,7 @@
       "incidents": [
         {
           "ruleId": "Scale.0001",
-          "incidentId": "28b82d2d-bef9-4939-abc2-fb081e8af71f",
+          "incidentId": "a0483204-6522-4117-93cb-3c61a44873d1",
           "location": "ContosoUniversity/ContosoUniversity.csproj",
           "locationKind": "File",
           "targets": {
@@ -107,7 +107,7 @@
         },
         {
           "ruleId": "Connection.0001",
-          "incidentId": "6f8d387c-ce1f-4e97-ac81-cd4a5de890c9",
+          "incidentId": "2760f0f9-87bf-4852-85ca-5122a5bd48a3",
           "location": "ContosoUniversity/appsettings.json",
           "locationKind": "File",
           "targets": {
