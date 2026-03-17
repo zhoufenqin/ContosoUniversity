@@ -1,57 +1,81 @@
 # Architecture Diagram
 
-This diagram represents the architecture of the Contoso University ASP.NET Core web application, showing its layers, data flow, and key dependencies.
+ContosoUniversity is an ASP.NET Core 6.0 Razor Pages web application for managing university students, courses, instructors, and departments, using Entity Framework Core with SQL Server for data persistence.
 
 ## Application Architecture
 
 ```mermaid
 flowchart TD
-    Browser["Browser\n(HTML / CSS / JS)"]
-
-    subgraph Presentation["Presentation Layer (Razor Pages)"]
-        Students["Students Pages\n(Index, Create, Edit, Delete, Details)"]
-        Courses["Courses Pages\n(Index, Create, Edit, Delete, Details)"]
-        Departments["Departments Pages\n(Index, Create, Edit, Delete, Details)"]
-        Instructors["Instructors Pages\n(Index, Create, Edit, Delete, Details)"]
-        About["About / Index / Privacy Pages"]
-        Static["Static Assets\n(Bootstrap, jQuery, wwwroot)"]
+    subgraph Client["Client Layer"]
+        Browser["Web Browser"]
+    end
+    subgraph App["Application Layer - ASP.NET Core 6.0 Razor Pages"]
+        Pages["Razor Pages (Students / Courses / Departments / Instructors)"]
+        PageModels["PageModels (OnGet / OnPost Handlers)"]
+        Utilities["PaginatedList / ViewModels"]
+    end
+    subgraph Data["Data Layer"]
+        EF["Entity Framework Core 6.0"]
+        DB[("SQL Server LocalDB")]
+        DbInit["DbInitializer (Seed Data)"]
     end
 
-    subgraph BusinessLogic["Business Logic Layer"]
-        PageModels["Razor Page Models\n(ASP.NET Core 6.0)"]
-        PaginatedList["PaginatedList Utility"]
-        ViewModels["View Models\n(InstructorIndexData, EnrollmentDateGroup,\nAssignedCourseData)"]
-    end
+    Browser -->|"HTTP requests"| Pages
+    Pages -->|"invokes"| PageModels
+    PageModels -->|"uses"| Utilities
+    PageModels -->|"queries / commands"| EF
+    EF -->|"SQL queries"| DB
+    DbInit -->|"seeds on startup"| DB
+```
 
-    subgraph DataLayer["Data Access Layer"]
-        EFCore["Entity Framework Core 6.0\n(ORM)"]
-        SchoolContext["SchoolContext\n(DbContext)"]
-        Migrations["EF Migrations"]
-        DbInitializer["DbInitializer\n(Seed Data)"]
-    end
+## Component Relationships
 
-    subgraph Models["Domain Models"]
+```mermaid
+flowchart LR
+    subgraph Presentation["Presentation"]
+        StudPages["Student Pages"]
+        CoursePages["Course Pages"]
+        DeptPages["Department Pages"]
+        InstrPages["Instructor Pages"]
+        OtherPages["Home / About / Error Pages"]
+    end
+    subgraph Business["Business Logic"]
+        StudPM["Student PageModels"]
+        CoursePM["Course PageModels"]
+        DeptPM["Department PageModels"]
+        InstrPM["Instructor PageModels"]
+        PaginatedList["PaginatedList"]
+        ViewModels["SchoolViewModels"]
+    end
+    subgraph DataAccess["Data Access"]
+        SchoolCtx["SchoolContext (DbContext)"]
+        DbInit["DbInitializer"]
+    end
+    subgraph Entities["Domain Models"]
         Student["Student"]
         Course["Course"]
-        Enrollment["Enrollment"]
         Instructor["Instructor"]
         Department["Department"]
+        Enrollment["Enrollment"]
         OfficeAssignment["OfficeAssignment"]
     end
 
-    subgraph DataStorage["Data Storage"]
-        SQLServer["SQL Server\n(LocalDB / mssqllocaldb)"]
-    end
-
-    Browser -->|HTTP requests| Presentation
-    Static -->|served by| Browser
-    Presentation --> PageModels
-    PageModels --> PaginatedList
-    PageModels --> ViewModels
-    PageModels --> SchoolContext
-    SchoolContext --> EFCore
-    EFCore --> Migrations
-    EFCore --> DbInitializer
-    SchoolContext --> Models
-    EFCore -->|SQL queries| SQLServer
+    StudPages -->|"backed by"| StudPM
+    CoursePages -->|"backed by"| CoursePM
+    DeptPages -->|"backed by"| DeptPM
+    InstrPages -->|"backed by"| InstrPM
+    StudPM -->|"uses"| PaginatedList
+    InstrPM -->|"uses"| ViewModels
+    CoursePM -->|"uses"| ViewModels
+    StudPM -->|"queries"| SchoolCtx
+    CoursePM -->|"queries"| SchoolCtx
+    DeptPM -->|"queries"| SchoolCtx
+    InstrPM -->|"queries"| SchoolCtx
+    DbInit -->|"seeds"| SchoolCtx
+    SchoolCtx -->|"maps"| Student
+    SchoolCtx -->|"maps"| Course
+    SchoolCtx -->|"maps"| Instructor
+    SchoolCtx -->|"maps"| Department
+    SchoolCtx -->|"maps"| Enrollment
+    SchoolCtx -->|"maps"| OfficeAssignment
 ```
