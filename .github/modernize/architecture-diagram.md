@@ -1,6 +1,6 @@
 # Architecture Diagram
 
-ContosoUniversity is an ASP.NET Core 6.0 Razor Pages web application using Entity Framework Core for data access against a SQL Server database.
+This is an ASP.NET Core 6.0 Razor Pages web application for managing university students, courses, instructors, and departments, backed by SQL Server via Entity Framework Core.
 
 ## Application Architecture
 
@@ -10,73 +10,67 @@ flowchart TD
         Browser["Web Browser"]
     end
     subgraph App["Application Layer - ASP.NET Core 6.0 Razor Pages"]
-        Pages["Razor Pages\nStudents / Courses / Departments / Instructors"]
-        Middleware["Middleware Pipeline\nHTTPS Redirect, Static Files, Routing, Authorization"]
-        ViewModels["View Models\nAssignedCourseData, InstructorIndexData, EnrollmentDateGroup"]
-        PaginatedList["PaginatedList Utility"]
+        Pages["Razor Pages"]
+        Middleware["Middleware Pipeline\n(HTTPS, Static Files, Routing, Authorization)"]
+        DI["Dependency Injection Container"]
     end
     subgraph Data["Data Layer"]
-        EFCore["Entity Framework Core 6.0"]
-        SchoolCtx[("SchoolContext\nDbContext")]
-        DB[("SQL Server\nLocalDB")]
-        DbInit["DbInitializer\nSeed Data"]
+        EF["Entity Framework Core 6.0"]
+        DB[("SQL Server LocalDB")]
     end
 
-    Browser -->|"HTTPS requests"| Middleware
-    Middleware -->|"routes"| Pages
-    Pages -->|"uses"| ViewModels
-    Pages -->|"paginates with"| PaginatedList
-    Pages -->|"queries / commands"| SchoolCtx
-    SchoolCtx -->|"ORM mapping"| EFCore
-    EFCore -->|"SQL queries"| DB
-    DbInit -->|"seeds on startup"| SchoolCtx
+    Browser -->|"HTTP/HTTPS requests"| Middleware
+    Middleware -->|"routes to"| Pages
+    Pages -->|"injects"| DI
+    DI -->|"resolves"| EF
+    EF -->|"SQL queries"| DB
+    DB -->|"seeded by"| DbInit["DbInitializer"]
 ```
 
 ## Component Relationships
 
 ```mermaid
 flowchart LR
-    subgraph Presentation["Presentation - Razor Pages"]
-        StudentsPages["Students Pages\nIndex, Create, Edit, Delete, Details"]
-        CoursesPages["Courses Pages\nIndex, Create, Edit, Delete, Details"]
-        DepartmentsPages["Departments Pages\nIndex, Create, Edit, Delete, Details"]
-        InstructorsPages["Instructors Pages\nIndex, Create, Edit, Delete, Details"]
-        HomePages["Home Pages\nIndex, About, Privacy, Error"]
+    subgraph Presentation["Presentation"]
+        StudentsPages["Students Pages\n(Index/Create/Edit/Delete/Details)"]
+        CoursesPages["Courses Pages\n(Index/Create/Edit/Delete/Details)"]
+        InstructorsPages["Instructors Pages\n(Index/Create/Edit/Delete/Details)"]
+        DepartmentsPages["Departments Pages\n(Index/Create/Edit/Delete/Details)"]
+        HomePages["Home Pages\n(Index/About/Privacy/Error)"]
     end
-    subgraph Domain["Domain Models"]
+    subgraph Business["Business Logic"]
+        PaginatedList["PaginatedList"]
+        Utility["Utility"]
+        InstructorCoursesBase["InstructorCoursesPageModel\n(base)"]
+        DeptNameBase["DepartmentNamePageModel\n(base)"]
+    end
+    subgraph DataAccess["Data Access"]
+        SchoolContext["SchoolContext\n(DbContext)"]
+        DbInitializer["DbInitializer"]
+    end
+    subgraph Entities["Entities"]
         Student["Student"]
         Course["Course"]
-        Department["Department"]
         Instructor["Instructor"]
+        Department["Department"]
         Enrollment["Enrollment"]
         OfficeAssignment["OfficeAssignment"]
     end
-    subgraph ViewModelLayer["View Models"]
-        AssignedCourseData["AssignedCourseData"]
-        InstructorIndexData["InstructorIndexData"]
-        EnrollmentDateGroup["EnrollmentDateGroup"]
-        PaginatedList["PaginatedList"]
-    end
-    subgraph DataAccess["Data Access"]
-        SchoolContext["SchoolContext"]
-        DbInitializer["DbInitializer"]
-    end
 
-    StudentsPages -->|"reads/writes"| SchoolContext
-    CoursesPages -->|"reads/writes"| SchoolContext
-    DepartmentsPages -->|"reads/writes"| SchoolContext
-    InstructorsPages -->|"reads/writes"| SchoolContext
-    HomePages -->|"reads"| SchoolContext
-    StudentsPages -->|"uses"| PaginatedList
-    StudentsPages -->|"uses"| EnrollmentDateGroup
-    InstructorsPages -->|"uses"| InstructorIndexData
-    InstructorsPages -->|"uses"| AssignedCourseData
-    CoursesPages -->|"uses"| AssignedCourseData
-    SchoolContext -->|"manages"| Student
-    SchoolContext -->|"manages"| Course
-    SchoolContext -->|"manages"| Department
-    SchoolContext -->|"manages"| Instructor
-    SchoolContext -->|"manages"| Enrollment
-    SchoolContext -->|"manages"| OfficeAssignment
-    DbInitializer -->|"seeds via"| SchoolContext
+    StudentsPages -->|"paginates"| PaginatedList
+    StudentsPages -->|"queries"| SchoolContext
+    CoursesPages -->|"uses"| DeptNameBase
+    CoursesPages -->|"queries"| SchoolContext
+    InstructorsPages -->|"uses"| InstructorCoursesBase
+    InstructorsPages -->|"queries"| SchoolContext
+    DepartmentsPages -->|"uses"| Utility
+    DepartmentsPages -->|"queries"| SchoolContext
+    HomePages -->|"queries"| SchoolContext
+    SchoolContext -->|"maps"| Student
+    SchoolContext -->|"maps"| Course
+    SchoolContext -->|"maps"| Instructor
+    SchoolContext -->|"maps"| Department
+    SchoolContext -->|"maps"| Enrollment
+    SchoolContext -->|"maps"| OfficeAssignment
+    DbInitializer -->|"seeds"| SchoolContext
 ```
