@@ -1,39 +1,52 @@
 ---
 name: assessment
-description: Run application assessment for a single repository using AppCAT MCP server
+description: Run application assessment for a single repository
 ---
 
 # Application Assessment
 
-This skill performs application assessment for a single repository using AppCAT tools via the Assessment MCP server.
+This skill performs application assessment for a single repository using AppCAT tools.
 
 ## When to Use This Skill
 
 Use this skill when you need to:
 
-• Assess a Java or .NET application for cloud readiness and migration issues
-• Generate detailed assessment reports with issue analysis and recommendations
-• Understand application dependencies, frameworks, and potential migration blockers
+- Assess a Java or .NET application for cloud readiness and migration issues
+- Generate detailed assessment reports with issue analysis and recommendations
+- Understand application dependencies, frameworks, and potential migration blockers
 
 ## What This Skill Does
 
 This skill performs a simplified assessment workflow:
 
-1. **Check MCP Availability**: Verify that the MCP tools 'appmod-precheck-assessment' and 'appmod-run-assessment' are available
-   - If these MCP tools are not configured, return immediately with setup instructions
+1. **Check Project Type and Prerequisites**:
+   - **For Java projects**: Verify that MCP tools are available ('appmod-precheck-assessment' and 'appmod-run-assessment')
+     - If these MCP tools are not configured, return immediately with setup instructions
+   - **For .NET projects**: Check if .NET SDK is available
+     - No MCP tools required for .NET assessment
 
-2. **Run Assessment**: Trigger AppCAT analysis via Assessment MCP server
-   - Auto-detects project type (Java or .NET)
-   - Installs AppCAT tooling if needed
-     - For .NET projects: Use `dotnet tool update -g dotnet-appcat` to install/update the AppCAT tool
+2. **Clean Previous Assessment Data**:
+   - Remove files in `.github/modernize/assessment` folder to prevent interference with the new assessment
+   - This ensures a clean state before running the assessment
+
+3. **Run Assessment**:
+   - **For Java projects**: Trigger AppCAT analysis via Assessment MCP server
+     - Uses 'appmod-precheck-assessment' and 'appmod-run-assessment' MCP tools
+     - Auto-detects project configuration
+   - **For .NET projects**: Install and run AppCAT directly
+     - Install: `dotnet tool update dotnet-appcat`
+     - Find all .csproj files in the workspace
+     - Join project paths with semicolons: `projectPaths="project1.csproj;project2.csproj"`
+     - Run: `dotnet-appcat analyze $projectPaths --source Solution --target Any --serializer APPMODJSON --code --privacyMode Restricted --non-interactive --report {workspace-path}\.github\modernize\assessment\report.json`
    - Analyzes code for cloud migration issues
    - Generates structured assessment data
-   - Report is stored under `.github/appmod/` directory
+   - Report is stored under `.github/modernize/assessment/` directory
 
-3. **Consolidate Report**: Find and copy the latest report
-   - Search for `report.json` under `.github/appmod/` subdirectories
-   - Common locations: `.github/appmod/appcat/result/report.json` or `.github/appmod/dotnet-appcat/result/report.json`
-   - Copy the latest report to `.github/appmod/report.json`
+4. **Consolidate Report** (Java projects only):
+   - Search for `report.json` under `.github/modernize/assessment/` subdirectories
+   - Common locations: `.github/modernize/assessment/result/report.json`
+   - Copy the latest report to `.github/modernize/assessment/report.json`
+   - For .NET projects, the report is already generated at `.github/modernize/assessment/report.json`
    - This consolidated report should be included in the pull request
 
 ## Input Parameters
@@ -44,72 +57,86 @@ This skill performs a simplified assessment workflow:
 
 ### Prerequisites
 
-Ensure that the MCP tools 'appmod-precheck-assessment' and 'appmod-run-assessment' are available. If not, the skill will return instructions for setup.
+**For Java projects**:
+- MCP tools must be available: 'appmod-precheck-assessment' and 'appmod-run-assessment'
+- If tools are not configured, the skill will return instructions for setup
+
+**For .NET projects**:
+- .NET SDK must be installed
+- No MCP tools required - appcat will be installed and run directly via .NET CLI
+- The assessment will automatically install `dotnet-appcat` tool if not already present
 
 ### Triggering Assessment
 
 Simply express the intent to assess the application. Example prompts:
 
-• "Assess the application"
-• "Run AppCAT assessment for this project"
-• "Analyze this application for Azure migration"
+- "Assess the application"
+- "Run assessment for this project"
 
-The MCP tools automatically:
-• Detect project language and framework
-• Install necessary assessment tooling
-• Execute comprehensive analysis
-• Generate report under `.github/appmod/` directory structure
+The assessment process automatically:
+- Detects project language and framework
+- **For Java**: Uses MCP tools to install and run AppCAT
+- **For .NET**: Installs dotnet-appcat tool and runs analysis directly
+- Executes comprehensive analysis
+- Generates report at `.github/modernize/assessment/report.json`
 
 ### Report Consolidation
 
-After assessment completes:
-1. Search for `report.json` files under `.github/appmod/` subdirectories
+
+**For Java projects**:
+1. Search for `report.json` files under `.github/modernize/assessment/` subdirectories
 2. If multiple reports exist, identify the most recently modified one
-3. Copy the latest report to `.github/appmod/report.json`
+3. Copy the latest report to `.github/modernize/assessment/report.json`
 4. Include this consolidated report in the pull request
 
-## Output Structure
+**For .NET projects**:
+1. Report is directly generated at `.github/modernize/assessment/report.json`
+2. Include this report in the pull request
 
-### report.json
-Generated by AppCAT via MCP server, typically stored under `.github/appmod/` subdirectories.
+## Report Output Location
 
-Common locations example:
-• `.github/appmod/appcat/result/report.json`
-• `.github/appmod/dotnet-appcat/result/report.json`
-• `.github/appmod/repos/report-{timestamp}.json`
+Report location depends on project type:
 
-The consolidated report is copied to:
-• `.github/appmod/report.json` (include this in pull request)
+**For Java projects** (via MCP server):
+- Initially stored under `.github/modernize/assessment/` subdirectories
+- Common locations: `.github/modernize/assessment/result/report.json`
+- Consolidated to: `.github/modernize/assessment/report.json`
 
-The report contains:
-• **Application profile**: Detected language, frameworks, build tools, and dependencies
-• **Issues**: Categorized findings with severity levels (mandatory, potential, optional)
-• **Incidents**: Specific code locations and details for each issue
-• **Analysis metadata**: Assessment tool version, timestamp, and configuration
+**For .NET projects** (direct execution):
+- Directly generated at: `.github/modernize/assessment/report.json`
 
+Final report location (include this in pull request):
+- `.github/modernize/assessment/report.json`
 ## Success Criteria
 
 Assessment is complete when:
-• ✅ Assessment MCP server is available (or clear instructions provided if not)
-• ✅ AppCAT analysis executes without errors via MCP server
-• ✅ Latest report.json located under `.github/appmod/` subdirectories
-• ✅ Report consolidated to `.github/appmod/report.json`
-• ✅ Consolidated report included in pull request
+- ✅ **For Java**: MCP server is available (or clear instructions provided if not)
+- ✅ **For .NET**: .NET SDK is available and dotnet-appcat tool is installed
+- ✅ AppCAT analysis executes without errors
+- ✅ Report generated at `.github/modernize/assessment/report.json`
+- ✅ Report metadata includes assessment tool version, timestamp, and configuration
 
-## Error Handling
+## Troubleshooting
 
-**MCP Not Available**:
-• Verify that the MCP tools 'appmod-precheck-assessment' and 'appmod-run-assessment' are available
-• Return immediately with setup instructions if not available
-• Do not attempt to run assessment without MCP
+**Prerequisites Not Met**:
+- **For Java**: Verify MCP tools are available ('appmod-precheck-assessment' and 'appmod-run-assessment')
+  - Return immediately with setup instructions if tools are not available
+  - Do not attempt to run assessment without MCP
+- **For .NET**: Verify .NET SDK is installed
+  - Check with `dotnet --version` command
+  - Provide installation instructions if .NET SDK is missing
 
 **Assessment Failures**:
-• Unsupported project type (only Java and .NET supported)
-• AppCAT installation issues
-• Invalid project structure or build configuration
+- Unsupported project type (only Java and .NET supported)
+- **For Java**: MCP server communication errors
+- **For .NET**: 
+  - dotnet-appcat tool installation failure
+  - dotnet-appcat command execution errors
+- Invalid project structure or build configuration
 
-**Report Location Issues**:
-• No report.json found under `.github/appmod/` subdirectories
-• Report file is corrupted or invalid JSON
+**Report Generation Issues**:
+- **For Java**: No report.json found under `.github/modernize/assessment/` subdirectories after MCP execution
+- **For .NET**: Report not generated at `.github/modernize/assessment/report.json`
+- Report file is corrupted or invalid JSON
 
-For any failure, provide clear error messages.
+For any failure, provide clear error messages and troubleshooting steps.
