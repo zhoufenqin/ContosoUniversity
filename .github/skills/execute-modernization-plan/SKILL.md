@@ -80,7 +80,24 @@ Given that modernization description, do this:
                 ```
         {{security-skill-for-the-task}} is resolved from the `skills` array in the security task in tasks.json. Each entry in `skills` is an object with `name` and `location` fields. If the task has multiple skills, combine all skill names into a single comma-separated list (e.g., `validate-cves-and-fix, additional-security-scan`). If there is only one skill, use its `name` value directly (e.g., `validate-cves-and-fix`).
 
-        6. Custom agent usage to complete containerization or deploy task:
+        6. Custom agent usage to complete the integration test task:
+        For tasks with `"type": "integrationTest"` in tasks.json, call custom agent `general-purpose` with prompt:
+                ```md
+                Call skill integration-tests to generate and run integration tests for the migrated project
+                Here is the integration test task details:
+                    - TaskId (from `id` field)
+                    - Description (from `description` field)
+                    - Requirements (from `requirements` field)
+                    - Test Layers (from `layers` field, e.g., [1, 2] for Layer 1 and Layer 2)
+                    - modernization-work-folder: The folder to save the modernization plan from input
+
+                The integration-tests skill should:
+                - For each layer in the layers array, run the integration-tests skill with that layer parameter
+                - Layer 1: Generate Local Integration Tests with TestContainers for all Azure services
+                - Layer 2: Generate Smoke Tests for basic application health checks
+                - Ensure all tests pass before marking the task as successful
+                ```
+        7. Custom agent usage to complete containerization or deploy task:
         Custom agent modernize-azure-deploy-developer for containerization or deploy, call the agent with prompt with below format
                 ```md
                 Deploy the application to Azure
