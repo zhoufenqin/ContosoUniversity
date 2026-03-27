@@ -21,6 +21,7 @@
         "oneOf": [
           { "$ref": "#/$defs/transformTask" },
           { "$ref": "#/$defs/upgradeTask" },
+          { "$ref": "#/$defs/integrationTestTask" },
           { "$ref": "#/$defs/containerizationTask" },
           { "$ref": "#/$defs/deploymentTask" },
           { "$ref": "#/$defs/securityTask" },
@@ -276,6 +277,36 @@
               "type": "string",
               "description": "Deployment tool name.",
               "const": "bicep"
+            }
+          }
+        }
+      ]
+    },
+    "integrationTestTask": {
+      "allOf": [
+        { "$ref": "#/$defs/taskBase" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "skills", "layers"],
+          "properties": {
+            "type": {
+              "const": "integrationTest",
+              "description": "Integration test task template - Generate and run integration tests for migrated Azure services. Only include when user explicitly requests integration testing. This task runs after all transform/upgrade tasks but before containerization."
+            },
+            "skills": {
+              "type": "array",
+              "description": "The skill used for this task, must be 'integration-tests'",
+              "items": { "$ref": "#/$defs/skill" }
+            },
+            "layers": {
+              "type": "array",
+              "description": "[Array of test layers to execute, e.g., [1, 2] for Layer 1 (Local Integration with TestContainers) and Layer 2 (Smoke Tests)]",
+              "items": {
+                "type": "number",
+                "enum": [1, 2]
+              },
+              "minItems": 1
             }
           }
         }
