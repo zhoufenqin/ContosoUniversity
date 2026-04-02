@@ -1,0 +1,40 @@
+{
+  "$schema": "tasks-schema.json",
+  "description": ".NET version upgrade plan from net6.0 to net10.0 (latest LTS)",
+  "tasks": [
+    {
+      "type": "upgrade",
+      "id": "001-upgrade-target-framework-and-packages",
+      "description": "Upgrade ContosoUniversity to net10.0: update TargetFramework, upgrade 4 NuGet packages, and fix API incompatibilities in Program.cs",
+      "reason": "ContosoUniversity currently targets net6.0 which reached end-of-life. Upgrading to net10.0 (latest LTS) ensures long-term support, access to performance improvements, and eliminates outdated package dependencies.",
+      "requirements": "1. In ContosoUniversity/ContosoUniversity.csproj: change TargetFramework from net6.0 to net10.0. 2. Update all 4 package references: Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore 6.0.2 → 10.0.5, Microsoft.EntityFrameworkCore.SqlServer 6.0.2 → 10.0.5, Microsoft.EntityFrameworkCore.Tools 6.0.2 → 10.0.5, Microsoft.VisualStudio.Web.CodeGeneration.Design 6.0.2 → 10.0.2. 3. In ContosoUniversity/Program.cs: fix or remove source-incompatible calls at line 10 (AddDatabaseDeveloperPageExceptionFilter) and line 24 (UseMigrationsEndPoint) if they fail to compile after the package upgrade to 10.0.5; address the behavioral change at line 17 (UseExceptionHandler) by ensuring the /Error route is registered or by using the overload with a handler delegate. 4. Run dotnet restore and dotnet build ContosoUniversity.sln; fix all compilation errors. 5. Run dotnet test ContosoUniversity.sln and ensure all tests pass.",
+      "environmentConfiguration": null,
+      "skills": [
+        { "name": "execute-modernization-task", "location": "project" }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "generateNewIntegrationTests": "false",
+        "passUnitTests": "true",
+        "passIntegrationTests": "false"
+      },
+      "successCriteriaStatus": {
+        "passBuild": "true",
+        "generateNewUnitTests": "true",
+        "generateNewIntegrationTests": "true",
+        "passUnitTests": "true",
+        "passIntegrationTests": "true"
+      },
+      "status": "success",
+      "taskSummary": "Successfully upgraded ContosoUniversity from net6.0 to net10.0. Updated TargetFramework in .csproj, upgraded 4 NuGet packages (Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore, Microsoft.EntityFrameworkCore.SqlServer, Microsoft.EntityFrameworkCore.Tools to 10.0.5, Microsoft.VisualStudio.Web.CodeGeneration.Design to 10.0.2). Program.cs APIs remained compatible — no code changes needed. Build and tests pass."
+    }
+  ],
+  "metadata": {
+    "planName": "upgrade-to-lts",
+    "projectName": "ContosoUniversity",
+    "language": "dotnet",
+    "createdAt": "2026-04-02T02:50:50.717Z",
+    "version": "1.0"
+  }
+}

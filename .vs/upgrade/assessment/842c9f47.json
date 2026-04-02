@@ -1,0 +1,54 @@
+{
+  "reportConfigHash": "842c9f47",
+  "createdAtUtc": "2026-04-02T02:53:35.321907Z",
+  "entries": [
+    {
+      "packageName": "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore",
+      "packageVersion": "6.0.2",
+      "insightsName": "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore",
+      "insightsCurrentVersion": "6.0.2",
+      "insightsNewVersion": "10.0.5",
+      "insightsDescription": "NuGet package upgrade is recommended",
+      "insightsIsCompatible": true,
+      "insightsProjects": [
+        "ContosoUniversity\\ContosoUniversity.csproj"
+      ]
+    },
+    {
+      "packageName": "Microsoft.EntityFrameworkCore.SqlServer",
+      "packageVersion": "6.0.2",
+      "insightsName": "Microsoft.EntityFrameworkCore.SqlServer",
+      "insightsCurrentVersion": "6.0.2",
+      "insightsNewVersion": "10.0.5",
+      "insightsDescription": "NuGet package upgrade is recommended",
+      "insightsIsCompatible": true,
+      "insightsProjects": [
+        "ContosoUniversity\\ContosoUniversity.csproj"
+      ]
+    },
+    {
+      "packageName": "Microsoft.EntityFrameworkCore.Tools",
+      "packageVersion": "6.0.2",
+      "insightsName": "Microsoft.EntityFrameworkCore.Tools",
+      "insightsCurrentVersion": "6.0.2",
+      "insightsNewVersion": "10.0.5",
+      "insightsDescription": "NuGet package upgrade is recommended",
+      "insightsIsCompatible": true,
+      "insightsProjects": [
+        "ContosoUniversity\\ContosoUniversity.csproj"
+      ]
+    },
+    {
+      "packageName": "Microsoft.VisualStudio.Web.CodeGeneration.Design",
+      "packageVersion": "6.0.2",
+      "insightsName": "Microsoft.VisualStudio.Web.CodeGeneration.Design",
+      "insightsCurrentVersion": "6.0.2",
+      "insightsNewVersion": "10.0.2",
+      "insightsDescription": "NuGet package upgrade is recommended",
+      "insightsIsCompatible": true,
+      "insightsProjects": [
+        "ContosoUniversity\\ContosoUniversity.csproj"
+      ]
+    }
+  ]
+}
