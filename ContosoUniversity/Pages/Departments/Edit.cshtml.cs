@@ -17,16 +17,16 @@ public class EditModel : PageModel
     }
 
     [BindProperty]
-    public Department Department { get; set; }
+    public Department Department { get; set; } = null!;
     // Replace ViewData["InstructorID"] 
-    public SelectList InstructorNameSL { get; set; }
+    public SelectList InstructorNameSL { get; set; } = null!;
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
-        Department = await _context.Departments
+        Department = (await _context.Departments
             .Include(d => d.Administrator)  // eager loading
             .AsNoTracking()                 // tracking not required
-            .FirstOrDefaultAsync(m => m.DepartmentID == id);
+            .FirstOrDefaultAsync(m => m.DepartmentID == id))!;
 
         if (Department == null)
         {
@@ -84,12 +84,12 @@ public class EditModel : PageModel
                     return Page();
                 }
 
-                var dbValues = (Department)databaseEntry.ToObject();
+                var dbValues = (Department)databaseEntry.ToObject()!;
                 await setDbErrorMessage(dbValues, clientValues, _context);
 
                 // Save the current ConcurrencyToken so next postback
                 // matches unless an new concurrency issue happens.
-                Department.ConcurrencyToken = (byte[])dbValues.ConcurrencyToken;
+                Department.ConcurrencyToken = dbValues.ConcurrencyToken;
                 // Clear the model error for the next postback.
                 ModelState.Remove($"{nameof(Department)}.{nameof(Department.ConcurrencyToken)}");
             }
@@ -133,7 +133,7 @@ public class EditModel : PageModel
         }
         if (dbValues.InstructorID != clientValues.InstructorID)
         {
-            Instructor dbInstructor = await _context.Instructors
+            Instructor? dbInstructor = await _context.Instructors
                .FindAsync(dbValues.InstructorID);
             ModelState.AddModelError("Department.InstructorID",
                 $"Current value: {dbInstructor?.FullName}");

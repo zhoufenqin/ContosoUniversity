@@ -16,7 +16,7 @@ public class DeleteModel : PageModel
     }
 
     [BindProperty]
-    public Course Course { get; set; }
+    public Course Course { get; set; } = null!;
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
@@ -25,10 +25,10 @@ public class DeleteModel : PageModel
             return NotFound();
         }
 
-        Course = await _context.Courses
+        Course = (await _context.Courses
             .AsNoTracking()
             .Include(c => c.Department)
-            .FirstOrDefaultAsync(m => m.CourseID == id);
+            .FirstOrDefaultAsync(m => m.CourseID == id))!;
 
         if (Course == null)
         {
@@ -44,7 +44,7 @@ public class DeleteModel : PageModel
             return NotFound();
         }
 
-        Course = await _context.Courses.FindAsync(id);
+        Course = (await _context.Courses.FindAsync(id))!;
 
         if (Course != null)
         {

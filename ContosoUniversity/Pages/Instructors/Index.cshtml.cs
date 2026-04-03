@@ -15,7 +15,7 @@ public class IndexModel : PageModel
         _context = context;
     }
 
-    public InstructorIndexData InstructorData { get; set; }
+    public InstructorIndexData InstructorData { get; set; } = null!;
     public int InstructorID { get; set; }
     public int CourseID { get; set; }
 

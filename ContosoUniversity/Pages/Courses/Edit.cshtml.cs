@@ -15,7 +15,7 @@ public class EditModel : DepartmentNamePageModel
     }
 
     [BindProperty]
-    public Course Course { get; set; }
+    public Course Course { get; set; } = null!;
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
@@ -24,8 +24,8 @@ public class EditModel : DepartmentNamePageModel
             return NotFound();
         }
 
-        Course = await _context.Courses
-            .Include(c => c.Department).FirstOrDefaultAsync(m => m.CourseID == id);
+        Course = (await _context.Courses
+            .Include(c => c.Department).FirstOrDefaultAsync(m => m.CourseID == id))!;
 
         if (Course == null)
         {

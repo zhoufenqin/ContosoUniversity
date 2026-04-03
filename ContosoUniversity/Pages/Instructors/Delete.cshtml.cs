@@ -16,7 +16,7 @@ public class DeleteModel : PageModel
     }
 
     [BindProperty]
-    public Instructor Instructor { get; set; }
+    public Instructor Instructor { get; set; } = null!;
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
@@ -25,7 +25,7 @@ public class DeleteModel : PageModel
             return NotFound();
         }
 
-        Instructor = await _context.Instructors.FirstOrDefaultAsync(m => m.ID == id);
+        Instructor = (await _context.Instructors.FirstOrDefaultAsync(m => m.ID == id))!;
 
         if (Instructor == null)
         {

@@ -15,7 +15,7 @@ public class EditModel : InstructorCoursesPageModel
     }
 
     [BindProperty]
-    public Instructor Instructor { get; set; }
+    public Instructor Instructor { get; set; } = null!;
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
@@ -24,11 +24,11 @@ public class EditModel : InstructorCoursesPageModel
             return NotFound();
         }
 
-        Instructor = await _context.Instructors
+        Instructor = (await _context.Instructors
             .Include(i => i.OfficeAssignment)
             .Include(i => i.Courses)
             .AsNoTracking()
-            .FirstOrDefaultAsync(m => m.ID == id);
+            .FirstOrDefaultAsync(m => m.ID == id))!;
 
         if (Instructor == null)
         {

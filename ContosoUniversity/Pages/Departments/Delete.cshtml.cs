@@ -16,15 +16,15 @@ public class DeleteModel : PageModel
     }
 
     [BindProperty]
-    public Department Department { get; set; }
-    public string ConcurrencyErrorMessage { get; set; }
+    public Department Department { get; set; } = null!;
+    public string? ConcurrencyErrorMessage { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int id, bool? concurrencyError)
     {
-        Department = await _context.Departments
+        Department = (await _context.Departments
             .Include(d => d.Administrator)
             .AsNoTracking()
-            .FirstOrDefaultAsync(m => m.DepartmentID == id);
+            .FirstOrDefaultAsync(m => m.DepartmentID == id))!;
 
         if (Department == null)
         {

@@ -7,10 +7,10 @@ namespace ContosoUniversity.Pages.Courses;
 
 public class DepartmentNamePageModel : PageModel
 {
-    public SelectList DepartmentNameSL { get; set; }
+    public SelectList DepartmentNameSL { get; set; } = null!;
 
     public void PopulateDepartmentsDropDownList(SchoolContext _context,
-        object selectedDepartment = null)
+        object? selectedDepartment = null)
     {
         var departmentsQuery = from d in _context.Departments
                                orderby d.Name // Sort by name.

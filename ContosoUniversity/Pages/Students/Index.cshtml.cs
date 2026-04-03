@@ -16,12 +16,12 @@ public class IndexModel : PageModel
         Configuration = configuration;
     }
 
-    public string NameSort { get; set; }
-    public string DateSort { get; set; }
-    public string CurrentFilter { get; set; }
-    public string CurrentSort { get; set; }
+    public string? NameSort { get; set; }
+    public string? DateSort { get; set; }
+    public string? CurrentFilter { get; set; }
+    public string? CurrentSort { get; set; }
 
-    public PaginatedList<Student> Students { get; set; }
+    public PaginatedList<Student> Students { get; set; } = null!;
 
     public async Task OnGetAsync(string sortOrder,
         string currentFilter, string searchString, int? pageIndex)

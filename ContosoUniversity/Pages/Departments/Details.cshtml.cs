@@ -15,7 +15,7 @@ public class DetailsModel : PageModel
         _context = context;
     }
 
-    public Department Department { get; set; }
+    public Department Department { get; set; } = null!;
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
@@ -24,8 +24,8 @@ public class DetailsModel : PageModel
             return NotFound();
         }
 
-        Department = await _context.Departments
-            .Include(d => d.Administrator).FirstOrDefaultAsync(m => m.DepartmentID == id);
+        Department = (await _context.Departments
+            .Include(d => d.Administrator).FirstOrDefaultAsync(m => m.DepartmentID == id))!;
 
         if (Department == null)
         {

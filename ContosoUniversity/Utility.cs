@@ -2,8 +2,8 @@
 
 public static class Utility
 {
-    public static string GetLastChars(byte[] token)
+    public static string GetLastChars(byte[]? token)
     {
-        return token[7].ToString();
+        return token?[7].ToString() ?? string.Empty;
     }
 }

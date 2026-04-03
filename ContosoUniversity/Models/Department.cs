@@ -8,7 +8,7 @@ public class Department
     public int DepartmentID { get; set; }
 
     [StringLength(50, MinimumLength = 3)]
-    public string Name { get; set; }
+    public string? Name { get; set; }
 
     [DataType(DataType.Currency)]
     [Column(TypeName = "money")]
@@ -23,8 +23,8 @@ public class Department
     public int? InstructorID { get; set; }
 
     [Timestamp]
-    public byte[] ConcurrencyToken { get; set; }
+    public byte[]? ConcurrencyToken { get; set; }
 
-    public Instructor Administrator { get; set; }
-    public ICollection<Course> Courses { get; set; }
+    public Instructor? Administrator { get; set; }
+    public ICollection<Course> Courses { get; set; } = [];
 }
