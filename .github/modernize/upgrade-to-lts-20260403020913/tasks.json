@@ -1,0 +1,51 @@
+{
+  "$schema": "tasks-schema.json",
+  "description": ".NET version upgrade plan from .NET 6.0 to .NET 10.0 (latest LTS)",
+  "tasks": [
+    {
+      "type": "upgrade",
+      "id": "001-upgrade-target-framework-and-packages",
+      "description": "Update TargetFramework to net10.0 and upgrade all 4 NuGet packages to 10.0.0",
+      "reason": "The project targets net6.0, which reached End of Life in November 2024. Upgrading to net10.0 (latest LTS) ensures continued security patches, performance improvements, and support through November 2028.",
+      "requirements": "In ContosoUniversity/ContosoUniversity.csproj: (1) Change <TargetFramework>net6.0</TargetFramework> to <TargetFramework>net10.0</TargetFramework>. (2) Update Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore from 6.0.2 to 10.0.0. (3) Update Microsoft.EntityFrameworkCore.SqlServer from 6.0.2 to 10.0.0. (4) Update Microsoft.EntityFrameworkCore.Tools from 6.0.2 to 10.0.0. (5) Update Microsoft.VisualStudio.Web.CodeGeneration.Design from 6.0.2 to 10.0.0. Run dotnet restore and dotnet build to verify.",
+      "environmentConfiguration": null,
+      "skills": [
+        { "name": "execute-modernization-task", "location": "project" }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "generateNewIntegrationTests": "false",
+        "passUnitTests": "true",
+        "passIntegrationTests": "false"
+      },
+      "status": "pending"
+    },
+    {
+      "type": "upgrade",
+      "id": "002-upgrade-resolve-breaking-changes",
+      "description": "Resolve EF Core and ASP.NET Core breaking changes introduced between .NET 6 and .NET 10",
+      "reason": "Upgrading across multiple major versions (6→7→8→9→10) introduces breaking changes in EF Core (cascade delete behavior, API changes) and ASP.NET Core that must be addressed for the application to build and run correctly.",
+      "requirements": "Review and update ContosoUniversity/Data/SchoolContext.cs for EF Core breaking changes: (1) Verify owned entity cascade delete configuration is correct for EF Core 10.0. (2) Check for any obsolete API usages flagged by the compiler and update accordingly. (3) Verify ContosoUniversity/Migrations/ apply cleanly by running: dotnet ef database update. If migration snapshot is inconsistent, add a new migration to reconcile. (4) Review ContosoUniversity/Program.cs for any deprecated middleware calls — UseDeveloperExceptionPage() and UseMigrationsEndPoint() are still valid but may emit warnings. (5) Optionally add <Nullable>enable</Nullable> to the .csproj and fix nullable warnings in Models/, Data/, and Pages/ directories. Run dotnet run to confirm the application starts, database migrates automatically, and Razor Pages load correctly.",
+      "environmentConfiguration": null,
+      "skills": [
+        { "name": "execute-modernization-task", "location": "project" }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "generateNewIntegrationTests": "false",
+        "passUnitTests": "true",
+        "passIntegrationTests": "false"
+      },
+      "status": "pending"
+    }
+  ],
+  "metadata": {
+    "planName": "upgrade-to-lts",
+    "projectName": "ContosoUniversity",
+    "language": "dotnet",
+    "createdAt": "2026-04-03T02:09:19.824Z",
+    "version": "1.0"
+  }
+}
