@@ -30,7 +30,7 @@ public class CreateModel : InstructorCoursesPageModel
     }
 
     [BindProperty]
-    public Instructor Instructor { get; set; }
+    public Instructor Instructor { get; set; } = null!;
 
     public async Task<IActionResult> OnPostAsync(string[] selectedCourses)
     {

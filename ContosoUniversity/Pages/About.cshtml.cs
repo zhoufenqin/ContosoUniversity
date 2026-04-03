@@ -14,7 +14,7 @@ public class AboutModel : PageModel
         _context = context;
     }
 
-    public IList<EnrollmentDateGroup> Students { get; set; }
+    public IList<EnrollmentDateGroup> Students { get; set; } = null!;
 
     public async Task OnGetAsync()
     {

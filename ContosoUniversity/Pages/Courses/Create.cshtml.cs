@@ -20,7 +20,7 @@ public class CreateModel : DepartmentNamePageModel
     }
 
     [BindProperty]
-    public Course Course { get; set; }
+    public Course Course { get; set; } = null!;
 
     public async Task<IActionResult> OnPostAsync()
     {

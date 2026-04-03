@@ -14,7 +14,7 @@ public class IndexModel : PageModel
         _context = context;
     }
 
-    public IList<Course> Courses { get; set; }
+    public IList<Course> Courses { get; set; } = null!;
 
     public async Task OnGetAsync()
     {

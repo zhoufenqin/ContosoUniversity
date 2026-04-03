@@ -14,7 +14,7 @@ public class DetailsModel : PageModel
         _context = context;
     }
 
-    public Student Student { get; set; }
+    public Student Student { get; set; } = null!;
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
@@ -23,11 +23,11 @@ public class DetailsModel : PageModel
             return NotFound();
         }
 
-        Student = await _context.Students
+        Student = (await _context.Students
             .Include(s => s.Enrollments)
             .ThenInclude(e => e.Course)
             .AsNoTracking()
-            .FirstOrDefaultAsync(m => m.ID == id);
+            .FirstOrDefaultAsync(m => m.ID == id))!;
 
         if (Student == null)
         {

@@ -10,13 +10,13 @@ public class Instructor
     [Required]
     [Display(Name = "Last Name")]
     [StringLength(50)]
-    public string LastName { get; set; }
+    public string LastName { get; set; } = null!;
 
     [Required]
     [Column("FirstName")]
     [Display(Name = "First Name")]
     [StringLength(50)]
-    public string FirstMidName { get; set; }
+    public string FirstMidName { get; set; } = null!;
 
     [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
@@ -29,6 +29,6 @@ public class Instructor
         get { return LastName + ", " + FirstMidName; }
     }
 
-    public ICollection<Course> Courses { get; set; }
-    public OfficeAssignment OfficeAssignment { get; set; }
+    public ICollection<Course> Courses { get; set; } = [];
+    public OfficeAssignment? OfficeAssignment { get; set; }
 }

@@ -15,7 +15,7 @@ public class EditModel : PageModel
     }
 
     [BindProperty]
-    public Student Student { get; set; }
+    public Student Student { get; set; } = null!;
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
@@ -24,7 +24,7 @@ public class EditModel : PageModel
             return NotFound();
         }
 
-        Student = await _context.Students.FindAsync(id);
+        Student = (await _context.Students.FindAsync(id))!;
 
         if (Student == null)
         {
