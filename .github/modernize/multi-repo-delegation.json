@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "createdAt": "2026-04-13T07:49:38.0977553Z",
+  "status": "in_progress",
+  "repos": [
+    {
+      "name": "ContosoUniversity",
+      "url": "https://github.com/zhoufenqin/ContosoUniversity",
+      "clonePath": "C:\\Users\\fenzho\\code\\github\\test\\repos\\ContosoUniversity",
+      "statusFileDirectory": "C:\\Users\\fenzho\\code\\github\\test\\repos\\ContosoUniversity\\.github\\modernize\\delegation",
+      "sessionId": "e06a7b90-787a-42c8-b06d-182bc6c5a92d",
+      "detectedLanguage": "DotNet",
+      "relativePath": ""
+    }
+  ]
+}
