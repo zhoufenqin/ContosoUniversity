@@ -34,6 +34,7 @@ Each of the item is written in the following format: `- **skill-name**: skill-de
 - **migration-mi-postgresql-azure-sdk-public-cloud**: Migrate from PostgreSQL to Azure Database for PostgreSQL with Azure SDK and managed identity for secure, credential-free authentication.
 - **migration-on-premises-user-authentication-to-microsoft-entra-id**: Migrate the user authentication to Microsoft Entra ID authentication
 - **migration-oracle-to-postgresql**: Migrate from Oracle DB to PostgreSQL
+- **migration-s3-to-azure-blob-storage**: Migrate AWS S3 to Azure Blob Storage
 - **migration-spring-jms-rabbitmq-servicebus**: Migrate from RabbitMQ with JMS to Azure Service Bus for a managed messaging service with JMS API support.
 
 ### Task Patterns without Skill Definitions
@@ -64,7 +65,6 @@ A pattern should be selected if it matches one of the customer's requirements, a
 - **migration-local-files-to-mounted-azure-storage**: Local files to mounted Azure Storage paths (starts with `${AZURE_MOUNT_PATH:/mnt/azure}`)
 - **migration-logging-to-file-to-logging-to-console**: Logging to file to logging to console
 - **migration-plaintext-credential-to-azure-keyvault**: Plaintext credentials to Azure Key Vault
-- **migration-s3-to-azure-blob-storage**: AWS S3 to Azure Blob Storage
 - **migration-sqs-to-servicebus**: AWS SQS to Azure Service Bus
 - **quartz-scheduler-to-azure-functions**: Quartz Scheduler to Azure Functions
 - **solace-pubsub-to-azure-service-bus**: Solace PubSub+ to Azure Service Bus

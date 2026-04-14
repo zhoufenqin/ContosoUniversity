@@ -47,7 +47,7 @@ Given the user input, do this:
     1) Follow the structure of the selected template to generate the plan
     2) Follow the rules defined in the template to fill in the sections with relevant information based on the analysis of user input and content of mentioned files
     3) Save the plan in folder ${modernization-work-folder} with the filename plan.md. If a plan already exists, overwrite it.
-    4) Generate a separate tasks.json file following the tasks-schema.json schema with all upgrade, transform, infrastructure, containerization, and deployment tasks
+    4) Generate a separate tasks.json file following the tasks-schema.json schema with all upgrade, transform, integration test, infrastructure, containerization, and deployment tasks
     5) Save the tasks in folder ${modernization-work-folder} with the filename tasks.json. If tasks.json already exists, overwrite it.
 
 
@@ -69,15 +69,38 @@ Given the user input, do this:
     - Do not add tests for unimpacted code or existing functionality unless user requested
     - **IMPORTANT**: Do NOT read individual skill files at this stage; Do Not include the skill detail in the tasks.
 
-    **Java Upgrade Task Guidelines**: You must refer to the ./java-upgrade-guideline.md for specific rules and guidelines when creating Java upgrade tasks.
+    **Integration Test Task Rules**: When user explicitly requests integration testing (e.g., "add integration tests", "generate integration tests", "test the migration"):
+    - Add an integration test task with type "integrationTest" after all transform/upgrade tasks but before containerization tasks
+    - This integration test task should:
+      - Have id format: "{sequence}-integrationTest" where sequence is the next number after the last migration task (e.g., if last migration is 001, use "002-integrationTest")
+      - Have description: "Generate and run integration tests for Azure service migrations"
+      - Use the "integration-tests" skill with location "builtin"
+      - Have dependencies on ALL transform and upgrade task ids (so it runs after all migrations are complete)
+      - Have requirements: "Generate Layer 1 (Local Integration with TestContainers) and Layer 2 (Smoke Tests) for all Azure service migrations"
+      - Have layers: [1, 2] (only Layer 1 and Layer 2 tests)
+      - Have environmentConfiguration: null
+    - The integration test task appears in plan.md as a separate section after migration tasks but before containerization
 
-4. **Clarification**: If there are any open issues in the plan
-    1) Return all the open issues to user for clarification
-    2) After user clarified, update the plan
+    **Java Upgrade Task Guidelines**: Only add an upgrade task if the user explicitly requests it. You must refer to the ./java-upgrade-guideline.md for specific rules and guidelines when creating Java upgrade tasks.
+
+    **.NET Upgrade Task Guidelines**: You must refer to the ./dotnet-upgrade-guideline.md for specific rules and guidelines when creating .NET upgrade tasks.
+
+    **IMPORTANT**: The upgrade task must be the first task in the task list because subsequent transform tasks (e.g., migrating to Azure services) depend on the upgraded runtime and project format.
+
+4. **Clarification**: If there are any open issues or ambiguities that need user input:
+    1) Write all open issues to `${modernization-work-folder}/clarifications.json` as a JSON array. Each entry must follow this exact format:
+       ```json
+       [
+         { "question": "What is your preferred authentication method for accessing Azure Storage?", "answer": "" }
+       ]
+       ```
+       Leave every `answer` field empty — the CLI will collect answers from the user interactively.
+    2) Do NOT embed clarification questions in `plan.md`. Do NOT wait for user input.
+       The CLI handles answer collection and plan refinement as a separate post-processing step.
 
 ## Completion Criteria
 
-1. All the open issues are clarified and the plan is updated
+1. If there are open issues or ambiguities, they are written to `clarifications.json` in the plan folder
 2. The modernization task list is built
 3. The modernization task list MUST be scoped according to user input
 4. DON'T RUN the plan if user does not explicitly ask you to run the plan
