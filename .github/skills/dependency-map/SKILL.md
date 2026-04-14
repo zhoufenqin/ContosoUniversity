@@ -5,7 +5,7 @@ description: Generate dependency map diagram from project build files
 
 # Dependency Map
 
-Analyze project build and package files to generate a visual map of all external dependencies grouped by functional category. Save to `.github/modernize/assessment/dependency-map.md`.
+Analyze project build and package files to generate a visual map of all external dependencies grouped by functional category. Save to `.github/modernize/assessment/engines/dependency-map.md`.
 
 This skill focuses exclusively on **declared external dependencies** (libraries, frameworks, packages). For internal application structure and component relationships, see the `architecture-diagram` skill.
 
@@ -105,7 +105,7 @@ flowchart LR
 
 ### Step 4: Save Output
 
-Save to `.github/modernize/assessment/dependency-map.md` with this exact structure:
+Save to `.github/modernize/assessment/engines/dependency-map.md` with this exact structure:
 
 ```
 # Dependency Map
@@ -145,4 +145,4 @@ A brief introduction (1-2 sentences) stating project name and total dependency c
 - Mermaid diagram renders correctly with dependencies grouped by functional category
 - Each dependency shows name and version
 - Output file contains only heading and one Mermaid block — no extra prose, tables, or lists
-- File saved to `.github/modernize/assessment/dependency-map.md`
+- File saved to `.github/modernize/assessment/engines/dependency-map.md`

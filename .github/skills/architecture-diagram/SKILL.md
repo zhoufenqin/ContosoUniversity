@@ -5,7 +5,7 @@ description: Generate architecture diagram with component relationship details f
 
 # Architecture Diagram
 
-This skill generates a two-layer architecture visualization: a high-level application architecture diagram and a detailed component relationship diagram. Produce both in a single pass and save to `.github/modernize/assessment/architecture-diagram.md`.
+This skill generates a two-layer architecture visualization: a high-level application architecture diagram and a detailed component relationship diagram. Produce both in a single pass and save to `.github/modernize/assessment/engines/architecture-diagram.md`.
 
 ## Input Parameters
 
@@ -119,7 +119,7 @@ flowchart LR
 
 ### Step 5: Save Output
 
-Save the combined output to `.github/modernize/assessment/architecture-diagram.md` with this exact structure:
+Save the combined output to `.github/modernize/assessment/engines/architecture-diagram.md` with this exact structure:
 
 ```
 # Architecture Diagram
@@ -162,4 +162,4 @@ A brief introduction (1-2 sentences).
 - Layer 1 Mermaid diagram renders correctly showing architecture with technology names, data storage, and external dependencies
 - Layer 2 Mermaid diagram renders correctly showing component interactions grouped by architectural layer
 - Output file contains only headings and Mermaid blocks — no extra prose, tables, or lists
-- File saved to `.github/modernize/assessment/architecture-diagram.md`
+- File saved to `.github/modernize/assessment/engines/architecture-diagram.md`
