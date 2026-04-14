@@ -22,7 +22,13 @@
         "passUnitTests": "true",
         "passIntegrationTests": "false"
       },
-      "status": "pending"
+      "status": "success",
+      "taskSummary": "Successfully upgraded ContosoUniversity from net6.0 to net10.0. Updated TargetFramework and all 4 NuGet packages (Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore, Microsoft.EntityFrameworkCore.SqlServer, Microsoft.EntityFrameworkCore.Tools, Microsoft.VisualStudio.Web.CodeGeneration.Design). Removed AddDatabaseDeveloperPageExceptionFilter() which was removed in .NET 10. UseMigrationsEndPoint() and UseExceptionHandler remain compatible. Build succeeds with 0 errors, 0 warnings.",
+      "successCriteriaStatus": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
     }
   ],
   "metadata": {
