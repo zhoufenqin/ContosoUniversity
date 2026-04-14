@@ -1,0 +1,35 @@
+{
+  "$schema": "tasks-schema.json",
+  "description": ".NET version upgrade plan from net6.0 to net10.0 (LTS)",
+  "tasks": [
+    {
+      "type": "upgrade",
+      "id": "001-upgrade-contosouniversity-net10",
+      "description": "Upgrade ContosoUniversity to net10.0: update target framework, upgrade 4 NuGet packages, and fix source-incompatible APIs in Program.cs",
+      "reason": "The project targets net6.0 which is end-of-life. Upgrading to net10.0 (LTS) provides long-term support, security updates, and access to the latest runtime improvements.",
+      "requirements": "1. Change TargetFramework in ContosoUniversity\\ContosoUniversity.csproj from net6.0 to net10.0. 2. Upgrade NuGet packages: Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore 6.0.2→10.0.5, Microsoft.EntityFrameworkCore.SqlServer 6.0.2→10.0.5, Microsoft.EntityFrameworkCore.Tools 6.0.2→10.0.5, Microsoft.VisualStudio.Web.CodeGeneration.Design 6.0.2→10.0.2. 3. Fix source-incompatible APIs in ContosoUniversity\\Program.cs: (a) Line 10 - AddDatabaseDeveloperPageExceptionFilter() is removed in .NET 10, remove or replace it; (b) Line 24 - UseMigrationsEndPoint() API is source-incompatible, update to the .NET 10 compatible usage from Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore 10.x. 4. Address behavioral change on Line 17 - UseExceptionHandler(\"/Error\") has changed behavior in .NET 10, verify and update as needed. 5. Run dotnet restore, then dotnet build and fix all compilation errors. 6. Run existing tests.",
+      "environmentConfiguration": null,
+      "skills": [
+        {
+          "name": "execute-modernization-task",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "generateNewIntegrationTests": "false",
+        "passUnitTests": "true",
+        "passIntegrationTests": "false"
+      },
+      "status": "pending"
+    }
+  ],
+  "metadata": {
+    "planName": "upgrade-to-lts",
+    "projectName": "ContosoUniversity",
+    "language": "dotnet",
+    "createdAt": "2026-04-14T02:10:04.583Z",
+    "version": "1.0"
+  }
+}
