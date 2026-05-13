@@ -5,7 +5,7 @@ description: Generate dependency map diagram from project build files
 
 # Dependency Map
 
-Analyze project build and package files to generate a visual map of all external dependencies grouped by functional category. Save to `.github/modernize/assessment/dependency-map.md`.
+Analyze project build and package files to generate a visual map of all external dependencies grouped by functional category. Save to `.github/modernize/assessment/engines/dependency-map.md`.
 
 This skill focuses exclusively on **declared external dependencies** (libraries, frameworks, packages). For internal application structure and component relationships, see the `architecture-diagram` skill.
 
@@ -103,9 +103,17 @@ flowchart LR
     SLF4J -.->|"implementation"| Logback
 ~~~
 
-### Step 4: Save Output
+### Step 4: Write Textual Explanations
 
-Save to `.github/modernize/assessment/dependency-map.md` with this exact structure:
+Write accompanying prose and tables that help readers understand the dependency landscape:
+
+- **Dependency Summary table**: Category | Count | Key Libraries | Notes (e.g., Web Frameworks | 2 | ASP.NET MVC 5.2.7, Razor 3.2.7 | Legacy MVC stack on .NET Framework)
+- **Version & Compatibility Risks**: A short paragraph highlighting dependencies that are outdated, end-of-life, or have known migration concerns (e.g., ".NET Framework 4.7.2 is in maintenance mode; Entity Framework 6 has a migration path to EF Core")
+- **Notable Observations**: 2-4 bullet points on anything noteworthy — duplicate functionality across libraries, deprecated packages, security-sensitive dependencies, or unusually large transitive trees
+
+### Step 5: Save Output
+
+Save to `.github/modernize/assessment/engines/dependency-map.md` with this exact structure:
 
 ```
 # Dependency Map
@@ -115,9 +123,19 @@ A brief introduction (1-2 sentences) stating project name and total dependency c
 ## Dependencies
 
 < Mermaid flowchart LR here >
-```
 
-**The output file must contain ONLY the heading, one brief intro line, and one Mermaid diagram block. No other text, tables, or lists.**
+### Dependency Summary
+
+[Table: Category | Count | Key Libraries | Notes]
+
+### Version & Compatibility Risks
+
+[Short paragraph on outdated or end-of-life dependencies]
+
+### Notable Observations
+
+[2-4 bullet points on noteworthy findings]
+```
 
 ## Scaling Rules
 
@@ -144,5 +162,7 @@ A brief introduction (1-2 sentences) stating project name and total dependency c
 
 - Mermaid diagram renders correctly with dependencies grouped by functional category
 - Each dependency shows name and version
-- Output file contains only heading and one Mermaid block — no extra prose, tables, or lists
-- File saved to `.github/modernize/assessment/dependency-map.md`
+- Dependency Summary table lists categories with counts and key libraries
+- Version & Compatibility Risks paragraph highlights outdated or end-of-life dependencies
+- Notable Observations lists 2-4 noteworthy findings
+- File saved to `.github/modernize/assessment/engines/dependency-map.md`
