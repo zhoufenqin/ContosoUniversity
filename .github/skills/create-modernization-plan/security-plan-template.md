@@ -1,15 +1,16 @@
 ## Security Compliance
 
-**Purpose**: Describe how to validate CVEs (Common Vulnerabilities and Exposures) in project dependencies and fix security issues.
+**Purpose**: Scan and remediate CVEs (Common Vulnerabilities and Exposures) in project dependencies to ensure the modernized application is free of known security vulnerabilities.
 
-**Condition**: Only include this section when the user explicitly specifies security requirements (e.g., "CVE clean", "no CVE issues", "fix security issues").
+**Condition**: Always include this section in every modernization plan. If the user specifies additional security requirements, incorporate them into the description and requirements below.
 
 **Template**:
 
-**Description**: [Brief description of security goal from user input]
+**Description**: Scan all project dependencies for known CVEs and remediate any identified vulnerabilities to ensure the application is secure before deployment.
 
 **Requirements**:
-  The original security requirements from user input
+  Upgrade vulnerable dependencies to the minmum patched version within the same major version. If a CVE fix requires a major version upgrade, do NOT upgrade automatically. Instead, document the affected dependency, the current version, the required major version, and the breaking change risk. Verify that the project builds and all tests pass after remediation.
+  If the user provided specific security requirements, incorporate them as well.
 
 **Environment Configuration**:
   Runtime environment established by previous tasks (e.g., Java Home, .NET runtime).
