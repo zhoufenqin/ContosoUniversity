@@ -1,0 +1,179 @@
+{
+  "packageGovernance": {
+    "totalDistinctPackages": 4,
+    "totalVersionDriftInstances": 0,
+    "targetFramework": "net10.0",
+    "packages": [
+      {
+        "name": "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore",
+        "totalProjectCount": 1,
+        "distinctVersionCount": 1,
+        "recommendedVersion": "10.0.8",
+        "isCompatible": true,
+        "description": "NuGet package upgrade is recommended",
+        "versions": [
+          {
+            "version": "6.0.2",
+            "projects": [
+              "ContosoUniversity"
+            ],
+            "isRecommended": false
+          }
+        ],
+        "upgrade": {
+          "newVersion": "10.0.8"
+        }
+      },
+      {
+        "name": "Microsoft.EntityFrameworkCore.SqlServer",
+        "totalProjectCount": 1,
+        "distinctVersionCount": 1,
+        "recommendedVersion": "10.0.8",
+        "isCompatible": true,
+        "description": "NuGet package upgrade is recommended",
+        "versions": [
+          {
+            "version": "6.0.2",
+            "projects": [
+              "ContosoUniversity"
+            ],
+            "isRecommended": false
+          }
+        ],
+        "upgrade": {
+          "newVersion": "10.0.8"
+        }
+      },
+      {
+        "name": "Microsoft.EntityFrameworkCore.Tools",
+        "totalProjectCount": 1,
+        "distinctVersionCount": 1,
+        "recommendedVersion": "10.0.8",
+        "isCompatible": true,
+        "description": "NuGet package upgrade is recommended",
+        "versions": [
+          {
+            "version": "6.0.2",
+            "projects": [
+              "ContosoUniversity"
+            ],
+            "isRecommended": false
+          }
+        ],
+        "upgrade": {
+          "newVersion": "10.0.8"
+        }
+      },
+      {
+        "name": "Microsoft.VisualStudio.Web.CodeGeneration.Design",
+        "totalProjectCount": 1,
+        "distinctVersionCount": 1,
+        "recommendedVersion": "10.0.2",
+        "isCompatible": true,
+        "description": "NuGet package upgrade is recommended",
+        "versions": [
+          {
+            "version": "6.0.2",
+            "projects": [
+              "ContosoUniversity"
+            ],
+            "isRecommended": false
+          }
+        ],
+        "upgrade": {
+          "newVersion": "10.0.2"
+        }
+      }
+    ]
+  },
+  "projects": [
+    {
+      "name": "ContosoUniversity",
+      "path": "ContosoUniversity/ContosoUniversity.csproj",
+      "isSdk": true,
+      "currentFrameworks": [
+        "net6.0"
+      ],
+      "targetFramework": "net10.0",
+      "dependencies": {
+        "packages": [
+          {
+            "name": "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore",
+            "version": "6.0.2",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "ContosoUniversity/ContosoUniversity.csproj"
+              }
+            ],
+            "description": "NuGet package upgrade is recommended",
+            "compatibility": "valid",
+            "recommendedVersion": "10.0.8",
+            "upgrade": {
+              "newVersion": "10.0.8"
+            }
+          },
+          {
+            "name": "Microsoft.EntityFrameworkCore.SqlServer",
+            "version": "6.0.2",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "ContosoUniversity/ContosoUniversity.csproj"
+              }
+            ],
+            "description": "NuGet package upgrade is recommended",
+            "compatibility": "valid",
+            "recommendedVersion": "10.0.8",
+            "upgrade": {
+              "newVersion": "10.0.8"
+            }
+          },
+          {
+            "name": "Microsoft.EntityFrameworkCore.Tools",
+            "version": "6.0.2",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "ContosoUniversity/ContosoUniversity.csproj"
+              }
+            ],
+            "description": "NuGet package upgrade is recommended",
+            "compatibility": "valid",
+            "recommendedVersion": "10.0.8",
+            "upgrade": {
+              "newVersion": "10.0.8"
+            }
+          },
+          {
+            "name": "Microsoft.VisualStudio.Web.CodeGeneration.Design",
+            "version": "6.0.2",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "ContosoUniversity/ContosoUniversity.csproj"
+              }
+            ],
+            "description": "NuGet package upgrade is recommended",
+            "compatibility": "valid",
+            "recommendedVersion": "10.0.2",
+            "upgrade": {
+              "newVersion": "10.0.2"
+            }
+          }
+        ],
+        "assemblies": [],
+        "projectReferences": [],
+        "frameworkReferences": []
+      }
+    }
+  ]
+}
